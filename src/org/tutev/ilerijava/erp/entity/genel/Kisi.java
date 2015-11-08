@@ -7,6 +7,7 @@ package org.tutev.ilerijava.erp.entity.genel;
 
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.tutev.ilerijava.erp.entity.base.Adres;
 import org.tutev.ilerijava.erp.entity.base.BaseEntity;
 
 /**
@@ -40,6 +42,8 @@ public class Kisi extends BaseEntity{
     private String ad;
     private String soyad;
     private Date dogumTarihi;
+    private Adres adres;
+    
 
     @Id
     @SequenceGenerator(name = "SQ_KISI",sequenceName = "SQ_KISI",allocationSize = 1,initialValue = 1)
@@ -81,6 +85,17 @@ public class Kisi extends BaseEntity{
         this.dogumTarihi = dogumTarihi;
     }
 
+    @Embedded
+    public Adres getAdres() {
+        return adres;
+    }
+
+    public void setAdres(Adres adres) {
+        this.adres = adres;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Kisi{" + "id=" + id + ", ad=" + ad + ", soyad=" + soyad + ", dogumTarihi=" + dogumTarihi + '}';

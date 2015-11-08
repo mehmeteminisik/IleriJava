@@ -5,6 +5,7 @@
  */
 package org.tutev.ilerijava.erp.service;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -18,11 +19,15 @@ import org.tutev.ilerijava.erp.utility.HibernateUtil;
  */
 public class KisiService implements ServiceBase<Kisi> {
 
+
     @Override
     public Kisi save(Kisi entity) {
         Session session = getSession();
         Transaction t= session.getTransaction();
         t.begin();
+        entity.setDurum(Boolean.TRUE);
+        entity.setEklemeTarihi(new Date());
+        entity.setEkleyen("CURR_USER");
         session.save(entity);
         t.commit();
         return entity;
@@ -33,6 +38,8 @@ public class KisiService implements ServiceBase<Kisi> {
         Session session = getSession();
         Transaction t= session.getTransaction();
         t.begin();
+        entity.setGuncellemeTarihi(new Date());
+        entity.setGuncelleyen("CURR_USER");
         session.saveOrUpdate(entity);
         t.commit();
         return entity;
@@ -63,6 +70,7 @@ public class KisiService implements ServiceBase<Kisi> {
 
     @Override
     public List<Kisi> getAll() {
+        //Criteria Where Şartı oluşturmayı sağlar
         Criteria criteria=getSession().createCriteria(Kisi.class);
         return (List<Kisi>) criteria.list();
     }
@@ -71,5 +79,4 @@ public class KisiService implements ServiceBase<Kisi> {
     public Session getSession() {
         return HibernateUtil.getSessionFactory().openSession();
     }
-
 }

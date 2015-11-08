@@ -15,6 +15,7 @@
     <mapping class="org.tutev.ilerijava.erp.entity.genel.Kisi"/>
     <mapping class="org.tutev.ilerijava.erp.entity.base.BaseEntity"/>
     <mapping class="org.tutev.ilerijava.erp.entity.genel.Kullanici"/>
+    <mapping class="org.tutev.ilerijava.erp.entity.base.Adres"/>
     
   </session-factory>
 </hibernate-configuration>
