@@ -8,11 +8,15 @@ package org.tutev.ilerijava.erp.entity.genel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.annotations.ForeignKey;
 import org.tutev.ilerijava.erp.entity.base.BaseEntity;
 
 /**
@@ -23,9 +27,10 @@ import org.tutev.ilerijava.erp.entity.base.BaseEntity;
 @Table(name = "AUT_USERS")
 public class Kullanici extends  BaseEntity{
     
-    Long id;
-    String username;
-    String password;
+    private Long id;
+    private String username;
+    private String password;
+    private Kisi kisi;
 
     @Id
     @SequenceGenerator(name = "SQ_KULLANICI",sequenceName = "SQ_KULLANICI",allocationSize = 1,initialValue = 1)
@@ -54,5 +59,16 @@ public class Kullanici extends  BaseEntity{
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "KISI_ID")
+    @ForeignKey(name = "FK_KISI_KULLANICI")
+    public Kisi getKisi() {
+        return kisi;
+    }
+
+    public void setKisi(Kisi kisi) {
+        this.kisi = kisi;
+    }
+       
 }
